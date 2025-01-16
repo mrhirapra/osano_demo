@@ -28,6 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <script src="https://cmp.osano.com/Azz8BxUZW6uC96GYa/2f59f869-5484-4eb4-9ada-6f79da286f9e/osano.js"></script>
       </body>
     </html>
   );
