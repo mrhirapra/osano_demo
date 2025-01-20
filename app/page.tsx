@@ -1,11 +1,25 @@
-import Image from "next/image";
-import Script from "next/script";
+'use client';
+import React from "react";
+import { useOsanoConsent } from "./hooks/useOsanoConsent";
 
 export default function Home() {
-  return (
-    <div className="h-screen flex items-center justify-center">
-        <p className="font-serif text-3xl capitalize">osano demo</p>
-        <Script src="https://cmp.osano.com/Azz8BxUZW6uC96GYa/2f59f869-5484-4eb4-9ada-6f79da286f9e/osano.js"></Script>
-    </div>
-  );
+    const consentStatus: any = useOsanoConsent();
+
+    if (!consentStatus) {
+        console.log('-------consentStatus--------', consentStatus);
+        return <div>Loading consent status...</div>;
+    }
+
+    return (
+        <div>
+            <h3 className="text-white">Consent Status:</h3>
+            <pre className="text-white">{JSON.stringify(consentStatus, null, 2)}</pre>
+            <p className="text-white">
+                Terms accepted: {consentStatus?.termsAccepted ? 'Yes' : 'No'}
+            </p>
+            <p className="text-white">
+                Privacy policy accepted: {consentStatus?.privacyPolicyAccepted ? 'Yes' : 'No'}
+            </p>
+        </div>
+    );
 }
